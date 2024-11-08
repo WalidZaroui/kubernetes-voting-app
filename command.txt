@@ -1,0 +1,25 @@
+#commands that can help
+kubectl get pods,svc #to display pods and services
+#to troubleshoot
+kubectl describe pod worker-app-pod > troubleshooting_pod_description.txt 
+kubectl logs worker-app-pod
+kubectl describe pod worker-app-pod
+
+#step1------------
+kubectl apply -f voting-app-deploy.yaml
+kubectl apply -f voting-app-service.yaml
+#now you have to test service of voting-app-service
+minikube service voting-service --url  
+#step2
+kubectl apply -f redis-deploy.yaml
+kubectl apply -f redis-service.yaml
+#step3
+kubectl apply -f postgres-deploy.yaml
+kubectl apply -f postgres-service.yaml
+#step4 note that worker app can take take few minutes size>500mb
+kubectl apply -f worker-app-deploy.yaml
+#step5
+kubectl apply -f result-app-deploy.yaml
+kubectl apply -f result-app-service.yaml
+#now you have to test service of result-app-service
+minikube service result-service --url  
